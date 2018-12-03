@@ -186,8 +186,9 @@ int main(int argc, char **argv)
         fprintf(stderr, "%s: no fortunes found.\n", programName);
         exit(-1);
     }
-
-    i = (unsigned long long)time(NULL) % numFortunes;    /*  Use time to pick a somewhat-random fortune.  */
+    
+    srand(time(NULL));
+    i = rand() % numFortunes;    /*  Use time to pick a somewhat-random fortune.  */
     resString = ures_getStringByIndex(fortunes_r, i, &len, &err);
     if (U_FAILURE(err)) {
         fprintf(stderr, "%s: ures_getStringByIndex(%d) failed, %s\n", programName, i, u_errorName(err));
